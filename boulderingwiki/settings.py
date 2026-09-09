@@ -1,10 +1,12 @@
 import os
 from pathlib import Path
+if os.path.isfile('env.py'):
+    import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-dev-only-key'
-DEBUG = True
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = os.getenv('DJANGO_DEBUG', False) == 'True'
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
