@@ -12,6 +12,13 @@ def home(request):
     })
 
 
+def article_list(request):
+    articles = Article.objects.select_related('category').order_by('-created_at')
+    return render(request, 'articles/article_list.html', {
+        'articles': articles,
+    })
+
+
 def categories(request):
     return render(request, 'articles/categories.html')
 

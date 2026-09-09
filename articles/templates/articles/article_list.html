@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Articles - BoulderingWiki{% endblock %}
+
+{% block content %}
+    <section aria-labelledby="article-list-title">
+        <h1 id="article-list-title">Articles</h1>
+
+        {% if articles %}
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <article>
+                            <h2><a href="#">{{ article.title }}</a></h2>
+                            <p><strong>Category:</strong> {{ article.category.name }}</p>
+                            <p>{{ article.content|truncatechars:120 }}</p>
+                            <p><a href="#">Read more</a></p>
+                        </article>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No articles yet.</p>
+        {% endif %}
+    </section>
+{% endblock %}
