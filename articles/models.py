@@ -12,7 +12,9 @@ class Category(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='articles')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
