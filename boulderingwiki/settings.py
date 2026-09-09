@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+
 if os.path.isfile('env.py'):
     import env
 
@@ -7,7 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.getenv('DJANGO_DEBUG', False) == 'True'
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['.herokuapp.com',
+                    '127.0.0.1',]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,6 +50,8 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 WSGI_APPLICATION = 'boulderingwiki.wsgi.application'
 
