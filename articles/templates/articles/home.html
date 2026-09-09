@@ -1,11 +1,41 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>BoulderingWiki</title>
-</head>
-<body>
-    <h1>BoulderingWiki</h1>
-    <p>Articles app is ready.</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}BoulderingWiki{% endblock %}
+
+{% block content %}
+    <section aria-labelledby="home-title">
+        <h1 id="home-title">BoulderingWiki</h1>
+        <p>Explore practical climbing routes, techniques, and bouldering ideas.</p>
+
+        <form method="get" action="{% url 'search' %}">
+            <label for="search-home">Search articles</label>
+            <input type="search" id="search-home" name="q" placeholder="Search articles">
+            <button type="submit">Search</button>
+        </form>
+
+        <section aria-labelledby="categories-title">
+            <h2 id="categories-title">Categories</h2>
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{% url 'categories' %}">{{ category.name }}</a></li>
+                {% empty %}
+                    <li>No categories yet.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section aria-labelledby="latest-title">
+            <h2 id="latest-title">Latest Articles</h2>
+            <ul>
+                {% for article in latest_articles %}
+                    <li>
+                        <a href="#">{{ article.title }}</a>
+                        <span>{{ article.category.name }}</span>
+                    </li>
+                {% empty %}
+                    <li>No articles yet.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </section>
+{% endblock %}
